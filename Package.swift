@@ -20,7 +20,9 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "AutoLayoutHelper",
-            dependencies: []),
+            dependencies: [],
+            path: "Sources/AutoLayoutHelper"
+        ),
         .testTarget(
             name: "AutoLayoutHelperTests",
             dependencies: ["AutoLayoutHelper"]),
