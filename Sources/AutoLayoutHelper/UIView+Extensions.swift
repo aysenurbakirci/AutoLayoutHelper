@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 //MARK: - Frame
-public struct UIView {
+public extension UIView {
     
     var origin: CGPoint {
         get {
@@ -306,6 +306,7 @@ public extension UIView {
 }
 
 //MARK: - SafeArea Anchor
+@available(iOS 11.0, *)
 public extension UIView {
     
     var safeAreaTopAnchor: NSLayoutYAxisAnchor {
