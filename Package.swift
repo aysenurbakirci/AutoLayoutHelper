@@ -24,7 +24,7 @@ let package = Package(
         .target(
             name: "AutoLayoutHelper",
             dependencies: [],
-            path: "Sources/AutoLayoutHelper"
+            path: "Sources"
         ),
         .testTarget(
             name: "AutoLayoutHelperTests",
