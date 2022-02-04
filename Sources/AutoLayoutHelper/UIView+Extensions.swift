@@ -4,6 +4,9 @@ import UIKit
 //MARK: - Frame
 public extension UIView {
     
+    /**
+     Easy use of origin for views
+     */
     var origin: CGPoint {
         get {
             return self.frame.origin
@@ -12,6 +15,9 @@ public extension UIView {
         }
     }
     
+    /**
+     Easy use of size for views
+     */
     var size: CGSize {
         get {
             return self.frame.size
@@ -20,6 +26,9 @@ public extension UIView {
         }
     }
     
+    /**
+     Easy use of x axis for views
+     */
     var x: CGFloat {
         get {
             return self.frame.origin.x
@@ -28,6 +37,9 @@ public extension UIView {
         }
     }
     
+    /**
+     Easy use of y axis for views
+     */
     var y: CGFloat {
         get {
             return frame.origin.y
@@ -36,6 +48,9 @@ public extension UIView {
         }
     }
     
+    /**
+     Easy use of width for views
+     */
     var width: CGFloat {
         get {
             return self.frame.size.width
@@ -44,43 +59,14 @@ public extension UIView {
         }
     }
     
+    /**
+     Easy use of height for views
+     */
     var height: CGFloat {
         get {
             return self.frame.size.height
         } set {
             self.frame = CGRect(x: x, y: y, width: width, height: newValue)
-        }
-    }
-    
-    var left: CGFloat {
-        get {
-            return x
-        } set {
-            x = newValue
-        }
-    }
-    
-    var right: CGFloat {
-        get {
-            return x + width
-        } set {
-            x = newValue - width
-        }
-    }
-    
-    var top: CGFloat {
-        get {
-            return y
-        } set {
-           y = newValue
-        }
-    }
-    
-    var bottom: CGFloat {
-        get {
-            return y + height
-        } set {
-            y = newValue - height
         }
     }
 }
@@ -93,6 +79,9 @@ public struct ViewAnchorWithConstant<T: NSObject> {
 
 public extension UIView {
     
+    /**
+     Create anchor, padding and size
+    */
     func anchor(top: NSLayoutYAxisAnchor? = nil,
                 leading: NSLayoutXAxisAnchor? = nil,
                 bottom: NSLayoutYAxisAnchor? = nil,
@@ -138,6 +127,9 @@ public extension UIView {
         }
     }
     
+    /**
+     Create anchor with constant value
+     */
     func anchor(top: ViewAnchorWithConstant<NSLayoutYAxisAnchor>? = nil,
                 leading: ViewAnchorWithConstant<NSLayoutXAxisAnchor>? = nil,
                 bottom: ViewAnchorWithConstant<NSLayoutYAxisAnchor>? = nil,
@@ -174,6 +166,9 @@ public extension UIView {
 //MARK: - Fill SuperView
 public extension UIView {
     
+    /**
+     Fill superview
+     */
     func fillSuperView() {
         anchor(top: self.superview?.topAnchor,
                leading: self.superview?.leadingAnchor,
@@ -181,6 +176,9 @@ public extension UIView {
                trailing: self.superview?.trailingAnchor)
     }
     
+    /**
+     Fill superview with different padding values
+     */
     func fillSuperView(with padding: ViewCornerPadding) {
         let padding = UIEdgeInsets.padding(padding)
         anchor(top: self.superview?.topAnchor,
@@ -190,6 +188,9 @@ public extension UIView {
                padding: padding)
     }
     
+    /**
+     Fill superview with equal padding values
+     */
     func fillSuperView(with equalPadding: CGFloat) {
         let equalPadding = UIEdgeInsets.equalPadding(equalPadding)
         anchor(top: self.superview?.topAnchor,
@@ -203,6 +204,9 @@ public extension UIView {
 //MARK: - Center Anchor
 public extension UIView {
     
+    /**
+     Center anchor
+     */
     func centerAnchor(centerY: NSLayoutYAxisAnchor? = nil,
                       centerX: NSLayoutXAxisAnchor? = nil) {
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -220,6 +224,9 @@ public extension UIView {
         }
     }
     
+    /**
+     Center anchor with constant value
+     */
     func centerAnchorWithConstant(centerY: NSLayoutYAxisAnchor? = nil,
                                   centerX: NSLayoutXAxisAnchor? = nil,
                                   x: CGFloat = 0,
@@ -239,16 +246,25 @@ public extension UIView {
         }
     }
     
+    /**
+     Center y anchor
+     */
     func centerYToSuperView() {
         guard let superView = self.superview else { return }
         centerAnchor(centerY: superView.centerYAnchor)
     }
     
+    /**
+     Center x anchor
+     */
     func centerXToSuperView() {
         guard let superView = self.superview else { return }
         centerAnchor(centerX: superView.centerXAnchor)
     }
     
+    /**
+     Center x and y anchor
+     */
     func centerToSuperView() {
         centerXToSuperView()
         centerYToSuperView()
@@ -258,6 +274,9 @@ public extension UIView {
 //MARK: - Size Anchor
 public extension UIView {
     
+    /**
+     Size anchor
+     */
     func sizeAnchor(width: CGFloat? = nil, height: CGFloat? = nil) {
         self.translatesAutoresizingMaskIntoConstraints = false
         
@@ -274,6 +293,9 @@ public extension UIView {
         }
     }
     
+    /**
+     Equal width with width ratio
+     */
     func equalWidth(to view: UIView, ratio: CGFloat = 1.0) {
         self.translatesAutoresizingMaskIntoConstraints = false
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -283,6 +305,9 @@ public extension UIView {
             .isActive = true
     }
     
+    /**
+     Equal height with height ratio
+     */
     func equalHeight(to view: UIView, ratio: CGFloat = 1.0) {
         self.translatesAutoresizingMaskIntoConstraints = false
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -292,11 +317,17 @@ public extension UIView {
             .isActive = true
     }
     
+    /**
+     Equal height with ratio. The ratio is the same for both values.
+     */
     func equalSize(to view: UIView, ratio: CGFloat = 1.0) {
         equalWidth(to: view, ratio: ratio)
         equalHeight(to: view, ratio: ratio)
     }
     
+    /**
+     Aspect ratio, width to height
+     */
     func viewAspect(ratio: CGFloat) {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.widthAnchor
@@ -309,18 +340,30 @@ public extension UIView {
 @available(iOS 11.0, *)
 public extension UIView {
     
+    /**
+     Top anchor to safe area.
+     */
     var safeAreaTopAnchor: NSLayoutYAxisAnchor {
         return self.safeAreaLayoutGuide.topAnchor
     }
     
+    /**
+     Left anchor to safe area.
+     */
     var safeAreaLeftAnchor: NSLayoutXAxisAnchor {
         return self.safeAreaLayoutGuide.leadingAnchor
     }
     
+    /**
+     Bottom anchor to safe area.
+     */
     var safeAreaBottomAnchor: NSLayoutYAxisAnchor {
         return self.safeAreaLayoutGuide.bottomAnchor
     }
     
+    /**
+     Right anchor to safe area.
+     */
     var safeAreaRightAnchor: NSLayoutXAxisAnchor {
         return self.safeAreaLayoutGuide.trailingAnchor
     }
