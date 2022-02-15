@@ -179,8 +179,11 @@ public extension UIView {
     /**
      Fill superview with different padding values
      */
-    func fillSuperView(with padding: ViewCornerPadding) {
-        let padding = UIEdgeInsets.padding(padding)
+    func fillSuperView(topPadding: CGFloat, leftPadding: CGFloat, bottomPadding: CGFloat, rightPadding: CGFloat) {
+        let padding = UIEdgeInsets.padding(top: topPadding,
+                                           left: leftPadding,
+                                           bottom: bottomPadding,
+                                           right: rightPadding)
         anchor(top: self.superview?.topAnchor,
                leading: self.superview?.leadingAnchor,
                bottom: self.superview?.bottomAnchor,

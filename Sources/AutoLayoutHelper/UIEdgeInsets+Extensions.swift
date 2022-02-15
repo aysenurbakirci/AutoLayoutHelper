@@ -1,19 +1,12 @@
 import Foundation
 import UIKit
 
-public struct ViewCornerPadding {
-    public var top: CGFloat
-    public var left: CGFloat
-    public var right: CGFloat
-    public var bottom: CGFloat
-}
-
 public extension UIEdgeInsets {
-    static func padding(_ padding: ViewCornerPadding) -> UIEdgeInsets {
-        return UIEdgeInsets(top: padding.top,
-                            left: padding.left,
-                            bottom: padding.bottom,
-                            right: padding.right)
+    static func padding(top: CGFloat = 0.0,
+                        left: CGFloat = 0.0,
+                        bottom: CGFloat = 0.0,
+                        right: CGFloat = 0.0) -> UIEdgeInsets {
+        return UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
     }
     
     static func equalPadding(_ inset: CGFloat) -> UIEdgeInsets {
