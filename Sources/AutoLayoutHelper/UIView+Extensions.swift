@@ -86,8 +86,7 @@ public extension UIView {
                 leading: NSLayoutXAxisAnchor? = nil,
                 bottom: NSLayoutYAxisAnchor? = nil,
                 trailing: NSLayoutXAxisAnchor? = nil,
-                padding: UIEdgeInsets = .zero,
-                size: CGSize = .zero) {
+                padding: UIEdgeInsets = .zero) {
         self.translatesAutoresizingMaskIntoConstraints = false
         
         if let top = top {
@@ -113,51 +112,43 @@ public extension UIView {
                 .constraint(equalTo: trailing, constant: -padding.right)
                 .isActive = true
         }
-        
-        if size.width != 0 {
-            self.widthAnchor
-                .constraint(equalToConstant: size.width)
-                .isActive = true
-        }
-        
-        if size.height != 0 {
-            self.heightAnchor
-                .constraint(equalToConstant: size.height)
-                .isActive = true
-        }
     }
     
     /**
      Create anchor with constant value
      */
-    func anchor(top: ViewAnchorWithConstant<NSLayoutYAxisAnchor>? = nil,
-                leading: ViewAnchorWithConstant<NSLayoutXAxisAnchor>? = nil,
-                bottom: ViewAnchorWithConstant<NSLayoutYAxisAnchor>? = nil,
-                trailing: ViewAnchorWithConstant<NSLayoutXAxisAnchor>? = nil) {
+    func anchor(top: NSLayoutYAxisAnchor? = nil,
+                topConstant: Double = 1.0,
+                leading: NSLayoutXAxisAnchor? = nil,
+                leadingConstant: Double = 1.0,
+                bottom: NSLayoutYAxisAnchor? = nil,
+                bottomConstant: Double = 1.0,
+                trailing: NSLayoutXAxisAnchor? = nil,
+                trailingConstant: Double = 1.0) {
         
         self.translatesAutoresizingMaskIntoConstraints = false
         
         if let top = top {
             self.topAnchor
-                .constraint(equalTo: top.anchor, constant: top.constant)
+                .constraint(equalTo: top, constant: topConstant)
                 .isActive = true
         }
         
         if let leading = leading {
             self.leadingAnchor
-                .constraint(equalTo: leading.anchor, constant: leading.constant)
+                .constraint(equalTo: leading, constant: leadingConstant)
                 .isActive = true
         }
         
         if let bottom = bottom {
             self.bottomAnchor
-                .constraint(equalTo: bottom.anchor, constant: -bottom.constant)
+                .constraint(equalTo: bottom, constant: -bottomConstant)
                 .isActive = true
         }
         
         if let trailing = trailing {
             self.trailingAnchor
-                .constraint(equalTo: trailing.anchor, constant: -trailing.constant)
+                .constraint(equalTo: trailing, constant: -trailingConstant)
                 .isActive = true
         }
     }
