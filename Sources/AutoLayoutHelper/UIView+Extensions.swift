@@ -72,11 +72,6 @@ public extension UIView {
 }
 
 //MARK: - Anchor
-public struct ViewAnchorWithConstant<T: NSObject> {
-    var anchor: NSLayoutAnchor<T>
-    var constant: CGFloat = 0.0
-}
-
 public extension UIView {
     
     /**
@@ -170,7 +165,10 @@ public extension UIView {
     /**
      Fill superview with different padding values
      */
-    func fillSuperView(topPadding: CGFloat, leftPadding: CGFloat, bottomPadding: CGFloat, rightPadding: CGFloat) {
+    func fillSuperView(topPadding: CGFloat,
+                       leftPadding: CGFloat,
+                       bottomPadding: CGFloat,
+                       rightPadding: CGFloat) {
         let padding = UIEdgeInsets.padding(top: topPadding,
                                            left: leftPadding,
                                            bottom: bottomPadding,
@@ -223,8 +221,8 @@ public extension UIView {
      */
     func centerAnchorWithConstant(centerY: NSLayoutYAxisAnchor? = nil,
                                   centerX: NSLayoutXAxisAnchor? = nil,
-                                  x: CGFloat = 0,
-                                  y: CGFloat = 0) {
+                                  constantX: CGFloat = 0,
+                                  constantY: CGFloat = 0) {
         self.translatesAutoresizingMaskIntoConstraints = false
         
         if let centerY = centerY {
@@ -271,7 +269,8 @@ public extension UIView {
     /**
      Size anchor
      */
-    func sizeAnchor(width: CGFloat? = nil, height: CGFloat? = nil) {
+    func sizeAnchor(width: CGFloat? = nil,
+                    height: CGFloat? = nil) {
         self.translatesAutoresizingMaskIntoConstraints = false
         
         if let width = width {
@@ -288,9 +287,32 @@ public extension UIView {
     }
     
     /**
+     Size anchor with multipler
+     */
+    func sizeAnchor(width: NSLayoutDimension? = nil,
+                    multiplerWidth: Double = 1.0,
+                    height: NSLayoutDimension? = nil,
+                    multiplerHeight: Double = 1.0) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
+        if let width = width {
+            self.widthAnchor
+                .constraint(equalTo: width, multiplier: multiplerWidth)
+                .isActive = true
+        }
+        
+        if let height = height {
+            self.heightAnchor
+                .constraint(equalTo: height, multiplier: multiplerHeight)
+                .isActive = true
+        }
+    }
+    
+    /**
      Equal width with width ratio
      */
-    func equalWidth(to view: UIView, ratio: CGFloat = 1.0) {
+    func equalWidth(to view: UIView,
+                    ratio: CGFloat = 1.0) {
         self.translatesAutoresizingMaskIntoConstraints = false
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -302,7 +324,8 @@ public extension UIView {
     /**
      Equal height with height ratio
      */
-    func equalHeight(to view: UIView, ratio: CGFloat = 1.0) {
+    func equalHeight(to view: UIView,
+                     ratio: CGFloat = 1.0) {
         self.translatesAutoresizingMaskIntoConstraints = false
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -322,7 +345,7 @@ public extension UIView {
     /**
      Aspect ratio, width to height
      */
-    func viewAspect(ratio: CGFloat) {
+    func aspect(ratio: CGFloat) {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.widthAnchor
             .constraint(equalTo: self.heightAnchor, multiplier: ratio)
