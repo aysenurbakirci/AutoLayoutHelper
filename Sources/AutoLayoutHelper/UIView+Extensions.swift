@@ -165,10 +165,10 @@ public extension UIView {
     /**
      Fill superview with different padding values
      */
-    func fillSuperView(topPadding: CGFloat,
-                       leftPadding: CGFloat,
-                       bottomPadding: CGFloat,
-                       rightPadding: CGFloat) {
+    func fillSuperView(topPadding: CGFloat = 0.0,
+                       leftPadding: CGFloat = 0.0,
+                       bottomPadding: CGFloat = 0.0,
+                       rightPadding: CGFloat = 0.0) {
         let padding = UIEdgeInsets.padding(top: topPadding,
                                            left: leftPadding,
                                            bottom: bottomPadding,
@@ -184,12 +184,11 @@ public extension UIView {
      Fill superview with equal padding values
      */
     func fillSuperView(with equalPadding: CGFloat) {
-        let equalPadding = UIEdgeInsets.equalPadding(equalPadding)
         anchor(top: self.superview?.topAnchor,
                leading: self.superview?.leadingAnchor,
                bottom: self.superview?.bottomAnchor,
                trailing: self.superview?.trailingAnchor,
-               padding: equalPadding)
+               padding: .equalPadding(equalPadding))
     }
 }
 
